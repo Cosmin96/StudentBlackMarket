@@ -9,7 +9,18 @@ from django.urls import reverse
 from django.core import validators
 # Create your views here.
 def index(request):
-	return render(request, 'mainapp/index.html')
+	if 'regist' in request.session:
+		del request.session['regist']
+
+	if not request.user.is_authenticated:
+		return HttpResponseRedirect(reverse('mainapp:authentication'))
+	try:
+		product = Product.objects.all()#.filter(owner = request.user)
+	except Product.DoesNotExist:
+		reflist = None
+
+	context = {'products' : product}
+	return render(request, 'mainapp/index.html', context)
 
 def newobject(request):
 	return render(request, 'mainapp/newobject.html')
