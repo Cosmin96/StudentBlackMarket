@@ -304,12 +304,13 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form class="form-horizontal form-label-left">
+                    <form action="{% url 'mainapp:addproduct'%}" class="form-horizontal form-label-left" method="post">
+                    {% csrf_token %}
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Name</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Default Input">
+                          <input type="text" name="title" class="form-control" placeholder="Default Input">
                         </div>
                       </div>
                       
@@ -320,7 +321,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
                         <div class="col-md-9 col-sm-9 col-xs-12"> 
-                          <select class="form-control">
+                          <select name="category" class="form-control">
                             <option>Choose option</option>
                             <option>Books</option>
                             <option>Household</option>
@@ -334,7 +335,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Location</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Default Input">
+                          <input type="text" name="location" class="form-control" placeholder="Default Input">
                         </div>
                       </div>
 
@@ -342,14 +343,14 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Price</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Default Input">
+                          <input type="text" name="price" class="form-control" placeholder="Default Input">
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Default Input">
+                          <input type="text" name="description" class="form-control" placeholder="Default Input">
                         </div>
                       </div>
                      

@@ -39,7 +39,7 @@ def addproduct(request):
 	description = request.POST['description']
 
 	user = request.user
-	product = Product(title = title, category = category, price = price, location = location, description = description, creator = user)
+	product = Product(name = title, category = category, price = price, location = location, description = description, creator = user)
 	product.save()
 
 	return HttpResponseRedirect(reverse('mainapp:index'))
