@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
-from SBM.models import Product
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404, render
@@ -15,7 +14,7 @@ def index(request):
 
 def authentication(request):
 	if request.user.is_authenticated:
-		return HttpResponseRedirect(reverse('SBM:index'))
+		return HttpResponseRedirect(reverse('mainapp:index'))
 	return render(request, 'SBM/login-signup.html')
 
 def signout(request):
@@ -74,7 +73,7 @@ def signin(request):
 		del request.session['regist']
 
 	if request.user.is_authenticated:
-		return HttpResponseRedirect(reverse('SBM:index'))
+		return HttpResponseRedirect(reverse('mainapp:index'))
 	email = request.POST['email']
 	password =  request.POST['password']
 
@@ -89,7 +88,7 @@ def signin(request):
 	user = authenticate(username = user1.username, password = password)
 	if user is not None:
 		login(request, user)
-		return HttpResponseRedirect(reverse('SBM:index'))
+		return HttpResponseRedirect(reverse('mainapp:index'))
 	else:
 		request.session['errormessage'] = 'Credentials are wrong!'
 		return HttpResponseRedirect(reverse('SBM:errormsg'))
