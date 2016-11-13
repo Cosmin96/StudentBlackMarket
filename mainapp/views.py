@@ -28,11 +28,38 @@ def newobject(request):
 def newrequest(request):
 	return render(request, 'mainapp/newrequest.html')
 
+def newprofile(request):
+	return render(request, 'mainapp/newprofile.html')
+
 def signout(request):
 	if 'regist' in request.session:
 		del request.session['regist']
 	logout(request)
 	return HttpResponseRedirect(reverse('SBM:index'))
+
+def changedata(request):
+	firstname = request.POST['firstname']
+	lastname = request.POST['lastname']
+	user = request.POST['user']
+	email = request.POST['email']
+	if not(user and email and firstname and lastname):
+		request.session['errormessage'] = 'Please complete all field in registration form!'
+		return HttpResponseRedirect(reverse('SBM:errormsg'))
+	
+	try:
+		validators.validate_email(email)
+	except:
+		request.session['errormessage'] = 'Email is not valid!'
+		return HttpResponseRedirect(reverse('SBM:errormsg'))
+
+	user = User.objects.get(username = request.user)
+	user.first_name = firstname
+	user.last_name = lastname
+	user.user = user
+	user.email = email
+	user.save()
+	request.session['regist'] = 'YES'
+	return HttpResponseRedirect(reverse('mainapp:index'))
 
 def addproduct(request):
 	if 'regist' in request.session:
@@ -57,3 +84,27 @@ def addproduct(request):
 	product.save()
 
 	return HttpResponseRedirect(reverse('mainapp:index'))
+
+def applyfilters(request):
+	category = request.POST['category']
+	price = request.POST['price']
+	title = request.POST['title']
+	location = request.POST['location']
+	try:
+		if(price is '5 or below'):
+			product = Product.objects.all().filter(category = category, price__lte = 5, name = title, location = location)
+		elif(price is '5-20'):
+			product = Product.objects.all().filter(category = category, price__gt = 5, price__lte = 20, name = title, location = location)
+		elif(price is '20-100'):
+			product = Product.objects.all().filter(category = category, price__gt = 20, price__lte = 100, name = title, location = location)
+		elif(price is '100 or above'):
+			product = Product.objects.all().filter(category = category, price_gt = 100, name = title, location = location)
+		elif(price is 'Any'):
+			product = Product.objects.all().filter(category = category, name = title, location = location)
+	except:
+		request.session['errormessage'] = 'No such product found'
+		return HttpResponseRedirect(reverse('SBM:errormsg'))
+
+	product = Product.objects.all().filter(category = category, name = title, location = location)
+	context = {'products': product}
+	return render(request, 'mainapp/index.html', context)

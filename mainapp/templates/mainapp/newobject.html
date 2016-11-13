@@ -95,14 +95,14 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form class="form-horizontal form-label-left">
-
+                                        <form method="post" action="{% url 'mainapp:applyfilters'%}" class="form-horizontal form-label-left">
+                                          {% csrf_token %}
                       
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select class="form-control">
+                          <select name="category" class="form-control">
                             <option>Choose option</option>
                             <option>Books</option>
                             <option>Household</option>
@@ -115,7 +115,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Price Range</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select class="form-control">
+                          <select name="price" class="form-control">
                             <option>Choose option</option>
                             <option>5 or below</option>
                             <option>5-20</option>
@@ -133,7 +133,7 @@
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Key Words</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Search">
+                          <input type="text" name="title" class="form-control" placeholder="Search">
                         </div>
                       </div>
                       </div>
@@ -143,12 +143,13 @@
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Universities</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Add location">
+                          <input type="text" name="location" class="form-control" placeholder="Add location">
                         </div>
                       </div>
                       </div>
 
-                    
+
+                     
                       
 
 
@@ -210,7 +211,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="{% url 'mainapp:newprofile' %}"> Profile</a></li>
                     <li><a href="{% url 'mainapp:signout' %}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>          
