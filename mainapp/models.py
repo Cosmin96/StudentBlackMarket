@@ -8,3 +8,4 @@ class Product(models.Model):
 	location = models.CharField(max_length = 100)
 	creator = models.ForeignKey(User, on_delete=models.CASCADE)
 	description =  models.CharField(max_length = 1000)
+	file =models.FileField(upload_to='files/%Y/%m/%d', default='mainapp/static/mainapp/production/images/default-avatar.png')

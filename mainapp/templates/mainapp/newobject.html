@@ -59,16 +59,16 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home</a>
+                  <li><a href="{% url 'mainapp:index' %}"><i class="fa fa-home"></i> Home</a>
                   </li>
-                  <li><a><i class="fa fa-home"></i> Products <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Products <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.html">Categories</a></li>
+                      <li><a href="{% url 'mainapp:index' %}">Categories</a></li>
                       <li><a href="{% url 'mainapp:newobject' %}">Offer</a></li>
                       <li><a href="index3.html">Request</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-home"></i> Filters <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-filter"></i> Filters <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li>
 
@@ -105,7 +105,7 @@
                           <select class="form-control">
                             <option>Choose option</option>
                             <option>Books</option>
-                            <option>Kitchen Stuff</option>
+                            <option>Household</option>
                             <option>Organs</option>
                             <option>Bikes</option>
                             <option>Other</option>
@@ -133,78 +133,22 @@
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Key Words</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Default Input">
+                          <input type="text" class="form-control" placeholder="Search">
                         </div>
                       </div>
                       </div>
-                      <div class="form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Universities
-                          <br>
-                          
-                        </label>
 
+                      <div class="control-group">
+                       
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Universities</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" value=""> Manchester
-                            </label>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" value=""> UCL
-                            </label>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" value=""> Cambridge
-                            </label>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" value=""> Any
-                            </label>
-                          </div>
-                          
-                          
+                          <input type="text" class="form-control" placeholder="Add location">
                         </div>
                       </div>
-
-                      <div class="form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Usage
-                          <br>
-                          
-                        </label>
-
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" value=""> New
-                            </label>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" value=""> Good
-                            </label>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" value=""> Ok
-                            </label>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" value=""> Might Work
-                            </label>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" value=""> Doesn't resemble the original
-                            </label>
-                          </div>
-                          
-                        </div>
                       </div>
 
+                    
                       
 
 
@@ -310,7 +254,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Name</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" name="title" class="form-control" placeholder="Default Input">
+                          <input type="text" name="title" class="form-control" placeholder="Write product name">
                         </div>
                       </div>
                       
@@ -335,7 +279,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Location</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" name="location" class="form-control" placeholder="Default Input">
+                          <input type="text" name="location" class="form-control" placeholder="Write your location">
                         </div>
                       </div>
 
@@ -343,14 +287,21 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Price</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" name="price" class="form-control" placeholder="Default Input">
+                          <input type="text" name="price" class="form-control" placeholder="Specify a price">
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" name="description" class="form-control" placeholder="Default Input">
+                          <input type="text" name="description" class="form-control" placeholder="Add a description">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Image</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="file" name="file" accept="image/*" class="form-control" placeholder="Add a .png file">
                         </div>
                       </div>
                      
