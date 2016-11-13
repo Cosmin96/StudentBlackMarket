@@ -265,12 +265,12 @@
 
           
           <!--div dinamic-->
-          {% for product in products %}
+          {% for req in reqs %}
           <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>{{ product.name}}</h2>
+                  <h2>{{ req.name}}</h2>
                   
                   <div class="clearfix"></div>
                 </div>
@@ -278,15 +278,13 @@
                   <div class="dashboard-widget-content">
 
                     <ul>
-                      <p align = "left">Category:{{product.category}}</p>
-                      <p align = "left">Price:{{product.price}}</p>
-                      <p align = "left">Location:{{product.location}}</p>
-                      <p align = "left">Creator:{{product.creator}}</p>
-                      <p align = "left">Description:{{product.description}}</p>
-                      <p align = "left"><img src="{% static 'mainapp/production/images/default-avatar.png'%}" height="200" width="200"></p>
+                      <p align = "left">Category:{{req.category}}</p>
+                      <p align = "left">Location:{{req.location}}</p>
+                      <p align = "left">Creator:{{req.creator}}</p>
+                      <p align = "left">Description:{{req.description}}</p>
                       <form action="{% url 'mainapp:index'%}" method="post">
                         {% csrf_token %}
-                       <button type="submit" class="btn btn-success">Buy</button>
+                       <button type="submit" class="btn btn-success">Answer</button>
                      </form>
                     </ul>
                   </div>

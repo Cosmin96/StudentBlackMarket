@@ -12,5 +12,7 @@ urlpatterns = [
 	url(r'^newprofile/$', views.newprofile, name='newprofile'),
 	url(r'^changedata/$', views.changedata, name='changedata'),
 	url(r'^applyfilters/$', views.applyfilters, name='applyfilters'),
+	url(r'^addreq/$', views.addreq, name='addreq'),
+	url(r'^reqpage/$', views.reqpage, name='reqpage'),
 ]
 

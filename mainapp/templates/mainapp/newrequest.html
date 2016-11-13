@@ -71,7 +71,8 @@
                   </li>
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Products <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{% url 'mainapp:index' %}">Categories</a></li>
+                      <li><a href="{% url 'mainapp:index' %}">All Products</a></li>
+                      <li><a href="{% url 'mainapp:reqpage' %}">All Requests</a></li>
                       <li><a href="{% url 'mainapp:newobject' %}">Offer</a></li>
                       <li><a href="{% url 'mainapp:newrequest' %}">Request</a></li>
                     </ul>
@@ -257,7 +258,7 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form action="{% url 'mainapp:index'%}" class="form-horizontal form-label-left" method="post">
+                    <form action="{% url 'mainapp:addreq'%}" class="form-horizontal form-label-left" method="post">
                     {% csrf_token %}
 
                       <div class="form-group">

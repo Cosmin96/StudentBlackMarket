@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
-from mainapp.models import Product
+from mainapp.models import Product, Request
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404, render
@@ -19,8 +19,30 @@ def index(request):
 	except Product.DoesNotExist:
 		reflist = None
 
-	context = {'products' : product}
+	user_counter = User.objects.count()
+	product_counter = Product.objects.count()
+	request_counter = Request.objects.count()
+
+	context = {'products' : product , 'user_counter' : user_counter, 'product_counter' : product_counter, 'request_counter' : request_counter}
 	return render(request, 'mainapp/index.html', context)
+
+def reqpage(request):
+	if 'regist' in request.session:
+		del request.session['regist']
+
+	if not request.user.is_authenticated:
+		return HttpResponseRedirect(reverse('mainapp:authentication'))
+	try:
+		req = Request.objects.all()#.filter(owner = request.user)
+	except Product.DoesNotExist:
+		reflist = None
+
+	user_counter = User.objects.count()
+	product_counter = Product.objects.count()
+	request_counter = Request.objects.count()
+
+	context = {'reqs' : req , 'user_counter' : user_counter, 'product_counter' : product_counter, 'request_counter' : request_counter}
+	return render(request, 'mainapp/reqpage.html', context)
 
 def newobject(request):
 	return render(request, 'mainapp/newobject.html')
@@ -84,6 +106,28 @@ def addproduct(request):
 	product.save()
 
 	return HttpResponseRedirect(reverse('mainapp:index'))
+
+def addreq(request):
+	if 'regist' in request.session:
+		del request.session['regist']
+
+	if not request.user.is_authenticated:
+		return HttpResponseRedirect(reverse('SBM:authentication'))
+
+	title = request.POST['title']
+	if title is '':
+		request.session['errormessage'] = 'A title is required!'
+		return HttpResponseRedirect(reverse('SBM:errormsg'))
+
+	category = request.POST['category']
+	location = request.POST['location']
+	description = request.POST['description']
+
+	user = request.user
+	req = Request(name = title, category = category, location = location, description = description, creator = user)
+	req.save()
+
+	return HttpResponseRedirect(reverse('mainapp:reqpage'))
 
 def applyfilters(request):
 	category = request.POST['category']
