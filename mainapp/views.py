@@ -25,6 +25,8 @@ def index(request):
 def newobject(request):
 	return render(request, 'mainapp/newobject.html')
 
+def newrequest(request):
+	return render(request, 'mainapp/newrequest.html')
 
 def signout(request):
 	if 'regist' in request.session:
